@@ -71,7 +71,7 @@ class Account:
                 "narration":"You borrowed money"
             }
             self.statement.append(transaction)
-            return f"{self.showbalance()} and you can borrow money"
+            return f"{self.showbalance()} and you Your outstanding loan is {self.loan}"
 
 
     def repayloan(self,amount):
