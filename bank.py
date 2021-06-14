@@ -2,8 +2,8 @@ from datetime import datetime
 class Account:
     def __init__(self,name,phonenumber,loan):
         self.name=name
-        self.loan=loan
         self.phonenumber=phonenumber
+        self.loan=loan
         self.balance=0
         self.statement=[]
         self.loan=0
@@ -14,7 +14,6 @@ class Account:
             10+amount
         except TypeError:
             return f"Amount must be figures"
-        
         if amount<0:
             return f"amount can't be less than 0"
         else:
@@ -130,28 +129,32 @@ class MobileMoneyAccount(Account):
     def __init__(self,name,phonenumber,loan,service_provider):
         Account.__init__(self,name,phonenumber,loan)
         self.service_provider=service_provider
+        self.transaction=100
 
     def buy_airtime(self,amount):
         try:
             10+amount
         except TypeError:
-            return f"Amount must be figures"
+            return "Amount must be figures"
         if amount<0:
             return f"Your balance is negative and You can't buy airtime"
-        elif amount<self.balance:
-            return f"Dear Customer Your balance is not sufficient;deposit money and try again"
+        elif amount>self.balance:
+            return "Dear Customer Your balance is not sufficient;deposit money and try again"
         else:
-            self.balance=self.balance-amount
+            self.balance-=amount
             return f"Dear Customer; Your can Buy airtime and your balance is {self.balance} "
     def withdraw(self,amount):
         try:
-            30000+amount
+            30+amount
         except TypeError:
             return f"Amount must be figures"
+        AmountToBeDeducted=amount+self.transaction
         if amount>self.balance:
             return f"Your balance is {self.balance} and You can not withdraw {amount}"
+        elif AmountToBeDeducted>self.balance:
+            return "The amount in your bank acount should be enough to cater for the transaction fees"
         else:
-            self.balance-=amount
+            self.balance-=AmountToBeDeducted
             now=datetime.now()
             transaction={
                 "amount":20,
@@ -160,6 +163,18 @@ class MobileMoneyAccount(Account):
             }
             self.statement.append(transaction)
             return self.showbalance()
+        
+
+
+
+
+
+        
+
+
+
+
+    
         
 
 
